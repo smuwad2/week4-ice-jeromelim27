@@ -11,19 +11,45 @@
 
    <input type="text" id="inputText">
    <!-- add a button here for adding new item -->
+    <button onclick="addItems()">Enter</button> 
 
    <ul>
-      <li>Notebook<!--<button>Delete</button></li>-->
-      <li>Jello</li>
-      <li>Spinach</li>
-      <li>Rice</li>
-      <li>Birthday Cake</li>
-      <li>Candles</li>
+      <li>Notebook<button onclick="deleteItems(event)">delete</button></li>
+      <li>Jello<button onclick="deleteItems(event)">delete</button></li>
+      <li>Spinach<button onclick="deleteItems(event)">delete</button></li>
+      <li>Rice<button onclick="deleteItems(event)">delete</button></li>
+      <li>Birthday Cake<button onclick="deleteItems(event)">delete</button></li>
+      <li>Candles<button onclick="deleteItems(event)">delete</button></li>
    </ul>
-
+  
    <script>
 
       // add code here
+      function addItems(){
+         var item = document.getElementById("inputText").value
+   
+         let liElem = document.createElement("li");
+         liElem.innerText = item;
+
+         let deletebutton = document.createElement("button");
+         deletebutton.innerText = "delete";
+
+         deletebutton.onclick = function(event){
+            deleteItems(event);
+         }
+
+         liElem.appendChild(deletebutton);
+
+         const ulElem = document.getElementsByTagName("ul")[0];
+         ulElem.appendChild(liElem);
+      }
+
+      function deleteItems(event){
+         var item = event.target.parentNode;
+         item.remove();
+      }
+
+
 
    </script>
 

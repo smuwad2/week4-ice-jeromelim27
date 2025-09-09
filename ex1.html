@@ -8,7 +8,7 @@
     <h2>Form Validation</h2>
 
     <form name="inputForm" action="#" onsubmit="return validateForm('inputForm')" autocomplete="on" >
-            ID: <input type="text" name="id" ><br>
+            ID: <input type="text" name="id"><br>
             Age: <input type="number" name="age" ><br>
             Email: <input type="text" name="email" ><br>
             Password: <input type="password" name="password" ><br>
@@ -16,15 +16,38 @@
         </form>
 
         <script>
-        
             function validateForm(formName) {
+                var errorMessages = "";
+
                 // Error messages:
                 // Invalid age: Age must be between 10 and 40.
                 // Invalid email: Email must contain the character @.
                 // Empty password: Password must be non-empty.
-                var errorMessages="";
-                
-                
+               var form = document.forms[formName];
+               var IDVal = form['id'].value;
+               var AgeVal = form['age'].value;
+               var EmailVal = form['email'].value;
+               var PassVal = form['password'].value;
+
+               if (IDVal.length > 11){
+                errorMessages += "Too long\n"
+               }
+               if(AgeVal > 40 || AgeVal < 10){
+                errorMessages += "Age must be between 10 and 40.\n"
+               }
+               if(!EmailVal.includes("@")){
+                errorMessages += "Email must contain the character @.\n"
+               }
+               if(PassVal.length == 0){
+                errorMessages += "Password must be non-empty.\n"
+               }
+               
+               if (errorMessages !== ""){
+                alert(errorMessages);
+                return false
+               }
+
+               return true;
             }
      
          </script>
